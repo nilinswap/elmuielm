@@ -40,6 +40,29 @@ channelPanel channels activeChannel =
         List.map channelEl channels
 
 
+cellStyle : Element msg -> Element msg
+cellStyle em =
+    el [ width fill, centerX ] (el [ centerX ] <| em)
+
+
+rowStyle : List (Element msg) -> Element msg
+rowStyle l =
+    el
+        [ width fill
+        , height fill
+        , padding 10
+        ]
+    <|
+        row
+            [ width fill
+            , height fill
+            , Border.color <| rgb255 0 0 0
+            , Border.width 1
+            , Background.color <| rgb255 230 230 230
+            ]
+            l
+
+
 chatPanel : String -> Element msg
 chatPanel channel =
     let
@@ -64,7 +87,23 @@ chatPanel channel =
                 ]
 
         messagePanel =
-            column [] []
+            column [ width fill, height fill, padding 10 ]
+                [ rowStyle
+                    [ cellStyle (text "hello")
+                    , cellStyle (text "world")
+                    , cellStyle (text "!")
+                    ]
+                , rowStyle
+                    [ cellStyle (Element.text "hello")
+                    , cellStyle (text "world")
+                    , cellStyle (text "!")
+                    ]
+                , rowStyle
+                    [ cellStyle (Element.text "hello")
+                    , cellStyle (text "world")
+                    , cellStyle (text "!")
+                    ]
+                ]
 
         footer =
             el [ alignBottom, padding 20, width fill ] <|
